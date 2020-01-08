@@ -1,0 +1,55 @@
+<ion-header>
+	<ion-navbar color="light">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text>Usuários</span>
+		</ion-title>
+	</ion-navbar>
+	<ion-toolbar color="secondary">
+		<ion-searchbar [formControl]="filterCtrl" placeholder="Procurar..."
+			(ionChange)="onSearching()"></ion-searchbar>
+		<ion-buttons end>
+			<button ion-button (click)="onOpenFilter()">
+				<ion-icon name="options"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="lightest-bg">
+
+	<div *ngIf="isSearching" class="spinner-container">
+		<ion-spinner></ion-spinner>
+	</div>
+
+	<!-- propriedade pullMin adicionada pois sem ela o evento ionRefresh era 
+acionado quando rolava a lista para baixo após aciona-lo manualmente -->
+	<ion-refresher slot="fixed" pullMin="100" (ionRefresh)="onRefresh($event)">
+		<ion-refresher-content refreshingSpinner="dots"></ion-refresher-content>
+	</ion-refresher>
+
+
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<ion-col>
+				<ion-list>
+
+					<ion-item *ngFor="let item of items" tapplable (click)="onOpenItemDetail(item)">
+						<h2 ion-text color="dark" class="fw500">{{item.name}}</h2>
+						<p ion-text color="primary" class="text-11x">{{ item.email }}</p>
+						<p ion-text color="primary" class="text-11x">{{ item.type }}</p>
+					</ion-item>
+
+				</ion-list>
+
+				<ion-infinite-scroll (ionInfinite)="onInfinite($event)">
+					<ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>
+				</ion-infinite-scroll>
+
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+</ion-content>

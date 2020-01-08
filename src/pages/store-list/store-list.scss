@@ -1,0 +1,31 @@
+page-store-list {
+  .searchbar-input {
+    box-shadow: none !important;
+  }
+
+  agm-map {
+    width: 100%;
+    height: 62vh;
+  }
+
+  ion-card-content p ion-badge {
+    float: right;
+  }
+
+  ion-card {
+		img {
+			width: 120px;
+			max-width: 100%;
+			height: auto;
+			margin: auto;
+		}
+	}
+
+  ion-footer {
+    padding: 8px 16px !important;
+  }
+
+  .content-ios hr {
+    height: 1px;
+  }
+}

@@ -1,0 +1,155 @@
+<ion-content padding color="light">
+	<div class="auth-content">
+
+		<!-- Logo -->
+		<div padding-horizontal text-center>
+			<div class="logo">
+				<img src="assets/img/logo-compare.png">
+			</div>
+		</div>
+
+		<div>
+		  <ion-segment [(ngModel)]="auth" color="primary">
+		    <ion-segment-button value="login">
+		      Entrar
+		    </ion-segment-button>
+		    <ion-segment-button value="register">
+		      Registre-se
+		    </ion-segment-button>
+		  </ion-segment>
+		</div>
+
+		<div [ngSwitch]="auth">
+			<!-- Login form -->
+			<div id="loginForm" *ngSwitchCase="'login'">
+				<form [formGroup]="onLoginForm" class="list-form">
+					<ion-item>
+						<ion-label floating>
+							<ion-icon name="mail" item-start></ion-icon>
+							E-mail
+						</ion-label>
+						<ion-input type="email" formControlName="email"></ion-input>
+					</ion-item>
+					<p ion-text color="danger" class="text-12x has-error" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">Campo obrigatório</p>
+
+					<ion-item>
+						<ion-label floating>
+							<ion-icon name="lock" item-start></ion-icon>
+							Senha
+						</ion-label>
+						<ion-input type="password" formControlName="password"></ion-input>
+					</ion-item>
+					<p ion-text color="danger" class="text-12x has-error" *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')">Campo obrigatório</p>
+				</form>
+
+				<p text-right ion-text color="secondary" tappable (click)="forgotPass()"><strong>Esqueceu sua senha?</strong></p>
+				<p text-right ion-text color="secondary" tappable (click)="onRegisterAccesscode()"><strong>Validar codigo para resetar senha</strong></p>
+
+				<div>
+					<button ion-button icon-start block color="secondary" (click)="login()" [disabled]="!onLoginForm.valid">
+						<ion-icon name="log-in"></ion-icon>
+						ENTRAR
+					</button>
+
+					<p text-center ion-text>Ou entre com:</p>
+
+					<ion-grid class="btn-group" fixed>
+						<ion-row>
+							<!-- <button ion-button icon-only block class="btn-facebook">
+								<ion-icon name="logo-facebook"></ion-icon>
+								Facebook
+							</button>
+							<button ion-button icon-only block class="btn-twitter col col-4 col-md-3 col-lg-2">
+								<ion-icon name="logo-twitter"></ion-icon>
+							</button>-->
+							<button ion-button icon-only block class="btn-gplus col col-4 col-md-3 col-lg-2" (click)="loginGoogle()">
+								<ion-icon name="logo-googleplus"></ion-icon>
+							</button> 
+							<button ion-button icon-only block color="light" (click)="openHomePage()">
+								<ion-icon name="close-circle"></ion-icon>
+								Cancelar
+							</button>
+						</ion-row>
+					</ion-grid>
+
+				</div>
+			</div>
+
+			<div id="registerForm" *ngSwitchCase="'register'">
+		    <!-- Register form -->
+		    <form [formGroup]="onRegisterForm" class="list-form">
+		      <ion-item>
+		        <ion-label floating>
+		          <ion-icon name="contact" item-start></ion-icon>
+		          Nome completo
+		        </ion-label>
+		        <ion-input type="text" formControlName="fullName"></ion-input>
+		      </ion-item>
+		      <p ion-text color="danger" class="text-12x has-error" *ngIf="onRegisterForm.get('fullName').touched && onRegisterForm.get('fullName').hasError('required')">Campo obrigatório</p>
+
+		      <ion-item>
+		        <ion-label floating>
+		          <ion-icon name="mail" item-start></ion-icon>
+		          E-mail
+		        </ion-label>
+		        <ion-input type="email" formControlName="email"></ion-input>
+		      </ion-item>
+		      <p ion-text color="danger" class="text-12x has-error" *ngIf="onRegisterForm.get('email').touched && onRegisterForm.get('email').hasError('required')">Campo obrigatório</p>
+
+		      <ion-item>
+		        <ion-label floating>
+		          <ion-icon name="emailConfirm" item-start></ion-icon>
+		          Confirmar E-mail
+		        </ion-label>
+		        <ion-input type="emailConfirm" formControlName="emailConfirm"></ion-input>
+		      </ion-item>
+		      <p ion-text color="danger" class="text-12x has-error" *ngIf="onRegisterForm.get('emailConfirm').touched && onRegisterForm.get('emailConfirm').hasError('required')">Campo obrigatório</p>
+
+		      <ion-item>
+		        <ion-label floating>
+		          <ion-icon name="lock" item-start></ion-icon>
+		          Senha
+		        </ion-label>
+		        <ion-input type="password" formControlName="password"></ion-input>
+		      </ion-item>
+		      <p ion-text color="danger" class="text-12x has-error" *ngIf="onRegisterForm.get('password').touched && onRegisterForm.get('password').hasError('required')">Campo obrigatório</p>
+			
+			  <ion-item>
+		        <ion-label floating>
+		          <ion-icon name="lock" item-start></ion-icon>
+		          Confirmar Senha
+		        </ion-label>
+		        <ion-input type="password" formControlName="passwordConfirm"></ion-input>
+		      </ion-item>
+		      <p ion-text color="danger" class="text-12x has-error" *ngIf="onRegisterForm.get('passwordConfirm').touched && onRegisterForm.get('passwordConfirm').hasError('required')">Campo obrigatório</p>
+			</form>
+
+		    <div margin-top>
+		      <button ion-button icon-start block color="secondary" (click)="register()" [disabled]="!onRegisterForm.valid">
+						<ion-icon name="checkmark-circle-outline"></ion-icon>
+		        CADASTRAR
+		      </button>
+<!-- 
+		      <p text-center ion-text>Ou cadastre-se com:</p>
+
+		      <ion-grid class="btn-group" fixed>
+		        <ion-row>
+		          <button ion-button icon-only block class="btn-facebook col">
+		            <ion-icon name="logo-facebook"></ion-icon>
+		          </button>
+		          <button ion-button icon-only block class="btn-twitter col col-4 col-md-3 col-lg-2">
+		            <ion-icon name="logo-twitter"></ion-icon>
+		          </button>
+		          <button ion-button icon-only block class="btn-gplus col col-4 col-md-3 col-lg-2">
+		            <ion-icon name="logo-googleplus"></ion-icon>
+		          </button>
+		        </ion-row>
+		      </ion-grid> -->
+		    </div>
+		  </div>
+
+		</div>
+
+
+	</div>
+</ion-content>

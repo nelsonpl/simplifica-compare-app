@@ -1,0 +1,126 @@
+<ion-header>
+	<ion-navbar color="light">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text class="logo-compare">COMPARE</span>
+		</ion-title>
+		<ion-buttons *ngIf="isNewMsg" end>
+			<button ion-button (click)="openMessage()">
+				<ion-icon name="notifications"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<ion-col>
+				<app-my-location></app-my-location>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-12>
+				<h2 padding-horizontal text-center>Produtos em Promoção</h2>
+			</ion-col>
+			<ion-col col-12 col-md-4 *ngFor="let dish of dishes | slice:0:9 ; index as i" (click)="openProductsDetail(dish)">
+				
+					<ion-list>
+						<ion-item>
+							<ion-thumbnail item-start>
+								<img alt="Produto" (error)="defaultImg($event, dish)" src="{{productImg(dish)}}">
+							</ion-thumbnail>
+							<h2 ion-text color="dark" class="fw500">{{dish.name}} - {{dish.volume}} {{dish.unit}}</h2>
+							<p ion-text color="dark" class="text-11x">{{ dish.type }} - {{ dish.brand }}</p>
+							<p ion-text color="primary">{{ dish.storeName }}</p>
+							<button ion-button clear class="green-bg text-white">R$ {{ dish.price.toLocaleString() }}</button>
+						</ion-item>
+					</ion-list>
+
+			</ion-col>
+		</ion-row>
+		
+		<ion-row padding>
+			<button ion-button round block color="secondary" (click)="openProducts()">
+				Mais produtos
+			</button>
+		</ion-row>
+	</ion-grid>
+
+	<ion-grid no-padding>
+		<ion-row>
+			<ion-col col-12>
+				<h2 padding-horizontal text-center>Promoções por Estabelecimentos</h2>
+			</ion-col>
+			<ion-col col-12 col-md-4 *ngFor="let restaurant of restaurants | slice:0:9 ; index as i" (click)="openStoreDetail(restaurant)">
+				<div padding-horizontal padding-top>
+					<ion-card no-margin>
+						<ion-card-content text-center>
+								<h2 ion-text color="dark" class="fw500">{{restaurant.name}}</h2>
+								<ion-avatar><img alt="Produto" (error)="defaultStoreImg($event, restaurant)" src="{{storeImg(restaurant)}}"></ion-avatar> 
+								<hr>
+								<p ion-text class="text-11x">{{restaurant.address}}, Nº: {{restaurant.number}}</p>
+								<p ion-text class="text-11x">Bairro: {{restaurant.neighborhood}}</p>
+								<p ion-text color="primary" no-margin>{{restaurant.city}}, {{restaurant.state}}</p>
+						</ion-card-content>
+					</ion-card>
+				</div>
+			</ion-col>
+		</ion-row>
+
+
+		<ion-row padding>
+			<button ion-button round block color="secondary" (click)="openStoreListPage()">
+				Mais Estabelecimentos
+			</button>
+		</ion-row>
+
+	</ion-grid>
+
+</ion-content>
+
+<!-- <ion-footer class="no-padding" color="secondary">
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<button ion-button icon-left block color="primary" (click)="openProducts()" class="col col-4">
+				<ion-icon name="pricetags" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x">Produtos</span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openList()" class="col col-4">
+				<ion-icon name="list-box" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x">Lista</span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openIndicationList()" class="col col-4">
+				<ion-icon name="thumbs-up" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x">Indicações</span>
+			</button>
+		</ion-row>
+	</ion-grid>
+
+</ion-footer> -->
+
+<ion-footer class="no-padding" color="secondary">
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+				<button ion-button icon-left block color="primary" (click)="openHome()" class="col col-4">
+					<ion-icon name="home" class="text-18x"></ion-icon>
+					<span ion-text class="text-12x"></span>
+				</button>
+			<button ion-button icon-left block color="primary" (click)="openProducts()" class="col col-4">
+				<ion-icon name="pricetags" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openStoreListPage()" class="col col-4">
+				<ion-icon name="pin" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openNearby()" class="col col-4">
+				<ion-icon name="map" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+		</ion-row>
+	</ion-grid>
+</ion-footer>

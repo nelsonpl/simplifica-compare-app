@@ -1,0 +1,26 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-buttons start>
+			<button ion-button round (click)="closeModal()">
+				<ion-icon name="close"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title>
+			<span ion-text>Filtro de busca</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="filters" padding>
+
+	<ion-item no-padding margin-bottom>
+		<ion-label color="primary" stacked>
+			<span ion-text color="dark" class="fw500">Categoria</span>
+		</ion-label>
+		<ion-select placeholder="Selecione uma categoria" [(ngModel)]="filters.category">
+			<ion-option *ngFor="let category of categoryList" >{{category.text}}</ion-option>
+		</ion-select>
+	</ion-item>
+
+	<button ion-button block color="primary" (click)="filter()">Filtrar Busca</button>
+</ion-content>

@@ -1,0 +1,46 @@
+<ion-header>
+		<ion-navbar color="light">
+			<ion-title>
+				<span ion-text>Message</span>
+			</ion-title>
+		</ion-navbar>
+	</ion-header>
+	
+	<ion-content>
+	
+		<form name="form" [formGroup]="onForm" (ngSubmit)="onSubmit()">
+			<ion-card>
+				<ion-card-content>
+					<ion-list>
+						<ion-item>
+							<ion-label>Título*</ion-label>
+							<ion-input required formControlName="title" [(ngModel)]="message.title" placeholder="Informe o titulo" type="text" ></ion-input>
+						</ion-item>
+						<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('title').touched && onForm.get('title').hasError('required')">Campo obrigatório</p>
+	
+						<ion-item>
+							<ion-label>Notificação*</ion-label>
+							<ion-input required formControlName="notification" placeholder="Informe o notificação"  type="text" [(ngModel)]="message.notification">
+							</ion-input>
+						</ion-item>
+						<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('notification').touched && onForm.get('notification').hasError('required')">Campo obrigatório</p>
+						<ion-item>
+							<ion-label>Enviar para</ion-label>
+							<ion-select formControlName="to" [(ngModel)]="message.to">
+								<ion-option value="users" >Usuários</ion-option>
+								<ion-option value="all" >Todos</ion-option>
+							</ion-select>
+						</ion-item>
+					</ion-list>
+				</ion-card-content>
+	
+			</ion-card>
+
+			<ion-card>
+				<ion-card-content>
+					<button ion-button block type="submit" [disabled]="!onForm.valid" color="primary">Salvar</button>
+				</ion-card-content>
+			</ion-card>
+		</form>
+	
+	</ion-content>

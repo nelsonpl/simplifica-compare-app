@@ -1,0 +1,48 @@
+<ion-header>
+	<ion-navbar color="light">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text>Mensagens</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="lightest-bg">
+
+	<ion-item *ngIf="isNotItems">
+		<ion-label color="primary">Nenhum item para mostrar.</ion-label>
+	</ion-item>
+
+	<div *ngIf="isSearching" class="spinner-container">
+		<ion-spinner></ion-spinner>
+	</div>
+
+	<!-- propriedade pullMin adicionada pois sem ela o evento ionRefresh era 
+		acionado quando rolava a lista para baixo após aciona-lo manualmente -->
+	<ion-refresher slot="fixed" pullMin="100" (ionRefresh)="onRefresh($event)">
+		<ion-refresher-content refreshingSpinner="dots"></ion-refresher-content>
+	</ion-refresher>
+
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<ion-col>
+				<ion-list>
+					<ion-item-sliding *ngFor="let message of messages">
+						<ion-card-content ion-item color="light">
+							<h2>{{message.title}}</h2>
+							<p>{{message.notification}}</p>
+							<p>{{message.updatedAt | date: 'dd/MM/yyyy'}}</p>
+						</ion-card-content>
+					</ion-item-sliding>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<ion-infinite-scroll (ionInfinite)="onInfinite($event)">
+		<ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>
+	</ion-infinite-scroll>
+
+</ion-content>

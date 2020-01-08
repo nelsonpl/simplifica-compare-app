@@ -1,0 +1,85 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-buttons start>
+			<button ion-button round (click)="closeModal()">
+				<ion-icon name="close"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title>
+			<span ion-text>Filtro de busca</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="filters" padding>
+
+	<ion-item no-padding margin-bottom>
+		<ion-label color="primary" stacked>
+			<span ion-text color="dark" class="fw500">Categorias da Loja</span>
+		</ion-label>
+		<ion-select  placeholder="Selecione uma categoria" [(ngModel)]="filters.storeCategory">
+			<ion-option *ngFor="let category of categoryList" >{{category.text}}</ion-option>
+		</ion-select>
+	</ion-item>
+
+	<!-- <ion-item no-padding>
+		<ion-label color="primary" stacked>
+			<span ion-text color="dark" class="fw500">Estado da Loja</span>
+		</ion-label>
+		<ion-input type="text" [(ngModel)]="filters.storeState" placeholder="SP, MT, MG..."></ion-input>
+	</ion-item>
+
+	<ion-item no-padding>
+		<ion-label color="primary" stacked>
+			<span ion-text color="dark" class="fw500">Cidade da Loja</span>
+		</ion-label>
+		<ion-input type="text" [(ngModel)]="filters.storeCity" placeholder="Mercado do João, Farmácia Saúde...">
+		</ion-input>
+	</ion-item> -->
+
+	<!-- <ion-item no-padding>
+		<ion-label color="primary" stacked>
+			<span ion-text color="dark" class="fw500">CEP da Loja</span>
+		</ion-label>
+		<ion-input type="number" [(ngModel)]="filters.storeCep" placeholder="Digite o CEP da sua área"></ion-input>
+	</ion-item> -->
+
+	<ion-item no-padding>
+		<ion-label color="primary" stacked>
+			<span ion-text color="dark" class="fw500">Nome da Loja</span>
+		</ion-label>
+		<ion-input type="text" [(ngModel)]="filters.storeName" placeholder="Mercado do João, Farmácia Saúde...">
+		</ion-input>
+	</ion-item>
+
+	<ion-item no-padding>
+		<ion-label color="primary" stacked>
+			<span ion-text color="dark" class="fw500">Tipo do Produto</span>
+		</ion-label>
+		<ion-input type="text" [(ngModel)]="filters.type" placeholder="Refrigerante, Mantimento, Doces..."></ion-input>
+	</ion-item>
+
+	<ion-item no-padding>
+		<ion-label color="primary" stacked>
+			<span ion-text color="dark" class="fw500">Marca do Produto</span>
+		</ion-label>
+		<ion-input type="text" [(ngModel)]="filters.brand" placeholder="Coca Cola, Tio Bonini..."></ion-input>
+	</ion-item>
+
+	<ion-item no-padding>
+		<ion-label color="primary" stacked> <span ion-text color="dark" class="fw500">Preço Min/Max:</span> <span
+				ion-text color="primary"> R$ {{priceRange.lower}} to R$ {{priceRange.upper}}</span>
+		</ion-label>
+		<ion-range dualKnobs="true" [(ngModel)]="priceRange" min="0" max="100" step="5" class="no-padding-top">
+		</ion-range>
+	</ion-item>
+<!-- 
+	<ion-item no-padding margin-bottom>
+		<ion-label>
+			<span ion-text color="dark" class="fw500">Promoções</span>
+		</ion-label>
+		<ion-toggle checked="false"></ion-toggle>
+	</ion-item> -->
+
+	<button ion-button block color="primary" (click)="filter()">Filtrar Busca</button>
+</ion-content>

@@ -1,0 +1,126 @@
+<ion-header>
+	<ion-navbar color="light">
+		<ion-title>
+			<span ion-text>Produto</span>
+		</ion-title>
+		<ion-buttons end>
+			<button ion-button *ngIf="isShare" icon-only (click)="onShare()">
+				<ion-icon name="share"></ion-icon>
+			</button>
+			<button ion-button icon-only *ngIf="isAuth" color="primary" (click)="favorite()">
+				<ion-icon *ngIf="isFavorite" name="heart" class="text-white"></ion-icon>
+				<ion-icon *ngIf="!isFavorite" name="heart-outline" class="text-white"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="dish">
+
+	<div *ngIf="product">
+		<ion-card class="dish-card">
+
+			<ion-card-content>
+				<ion-avatar item-start padding>
+					<img alt="Produto" style="width: 80px; height: 80px;" (error)="defaultImg($event, product)"
+						src="{{productImg(product)}}">
+				</ion-avatar>
+				<div padding>
+					<ion-grid class="filters" no-padding fixed>
+						<ion-row>
+							<ion-col text-center>
+								<h1>{{product.name}} - {{product.volume}} {{product.unit}}</h1>
+								<h4 ion-text color="light">{{ product.type }} - {{ product.brand }}</h4>
+								<h1 ion-text class="text-white fw700">R$:{{ product.price.toLocaleString() }}</h1>
+								<!-- <hr margin-vertical> -->
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</div>
+				<span no-padding *ngFor="let item of shoppList">
+					<ion-badge color="light" tapplable (click)="onOpenShoppList(item)">{{item.title}}</ion-badge>
+				</span>
+			</ion-card-content>
+
+
+		</ion-card>
+
+		<ion-card *ngIf="product.store" style="box-shadow:none;">
+			<ion-card-content>
+
+				<h2 ion-text color="primary" class="fw500">Loja</h2>
+				<p ion-text>{{product.store.name}}</p>
+				<hr>
+
+				<h2 ion-text color="primary" class="fw500">Endereço</h2>
+				<p ion-text>{{product.store.address}}, Nº: {{product.store.number}},
+					Bairro:{{product.store.neighborhood}}</p>
+				<hr>
+
+				<h2 ion-text color="primary" class="fw500">Cidade</h2>
+				<p ion-text>{{product.store.city}}/{{product.store.state}}</p>
+				<hr>
+
+				<h2 ion-text color="primary" class="fw500">Contato</h2>
+				<p ion-text>Telefone: {{product.store.phone}}</p>
+				<p ion-text>Celular: {{product.store.cell}}</p>
+				<p ion-text>E-mail: {{product.store.email}}</p>
+
+				<hr margin-bottom>
+				<h2 ion-text color="primary" class="fw500">Como chegar</h2>
+			</ion-card-content>
+		</ion-card>
+	</div>
+
+	<div #myMap></div>
+	<!-- <div id="map_{{productId}}" style="width:100%; height:175px;"></div> -->
+	<ion-row padding>
+		<button ion-button round block color="primary" (click)="onNavigate()">Rota</button>
+		<button *ngIf="isAuth" ion-button block color="primary" (click)="onAddShopp()">Adicionar a Lista de
+			Compras</button>
+	</ion-row>
+
+	<ion-card *ngIf="productList">
+		<ion-card-header>
+			<ion-card-title color="primary">Você pode se interessar</ion-card-title>
+		</ion-card-header>
+		<ion-card-content>
+			<ion-list>
+				<ion-item no-padding *ngFor="let item of productList | slice:0:5 ; index as i" tapplable
+					(click)="onOpenProductDetail(item)">
+					<ion-thumbnail item-start>
+						<img alt="Produto" (error)="defaultImg($event, item)" src="{{productImg(item)}}">
+					</ion-thumbnail>
+					<h2 ion-text color="dark" class="fw500">{{item.name}} - {{item.volume}} {{item.unit}}</h2>
+					<p ion-text class="text-11x">{{ item.brand }} - {{ item.type }}</p>
+					<p ion-text color="primary">{{ item.storeName }}</p>
+					<button ion-button clear class="green-bg text-white">R$:{{ item.price.toLocaleString() }}</button>
+				</ion-item>
+			</ion-list>
+		</ion-card-content>
+	</ion-card>
+
+</ion-content>
+
+<ion-footer class="no-padding" color="secondary">
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<button ion-button icon-left block color="primary" (click)="openHome()" class="col col-4">
+				<ion-icon name="home" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openProducts()" class="col col-4">
+				<ion-icon name="pricetags" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openStoreListPage()" class="col col-4">
+				<ion-icon name="pin" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openNearby()" class="col col-4">
+				<ion-icon name="map" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+		</ion-row>
+	</ion-grid>
+</ion-footer>

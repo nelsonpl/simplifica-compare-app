@@ -1,0 +1,32 @@
+page-support {
+  .support-header {
+    width: 100%;
+    min-height: 150px;
+    text-align: center;
+    background: color($colors, secondary);
+    p {
+      color: color($colors, primary);
+    }
+    ion-icon {
+      color: color($colors, primary);
+      width: 20px;
+    }
+  }
+  ion-card {
+    &.card {
+      box-shadow: none;
+    }
+  }
+
+  .md,
+  .wp {
+    .support-info [text-right] {
+      margin-right: 0;
+    }
+  }
+
+  .ios .support-info ion-icon {
+    width: auto;
+    margin-right: 10px;
+  }
+}

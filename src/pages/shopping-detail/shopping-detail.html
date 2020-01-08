@@ -1,0 +1,91 @@
+<ion-header>
+		<ion-navbar color="light">
+			<button ion-button menuToggle>
+				<ion-icon name="menu"></ion-icon>
+			</button>
+			<ion-title>
+				<span ion-text>Lista de Compras</span>
+			</ion-title>
+		</ion-navbar>
+	</ion-header>
+	
+	<ion-content class="lightest-bg">
+	
+		<ion-card *ngIf="shopping">
+			<ion-item>
+				<p ion-text>{{shopping.title}}</p>
+				<p ion-text>{{shopping.description}}</p>
+				<button ion-button item-end (click)="onToggleShoppProducts()">
+					<ion-icon *ngIf="!isShowProducts" name="add"></ion-icon>
+					<ion-icon *ngIf="isShowProducts" name="remove"></ion-icon>
+				</button>
+			</ion-item>
+			<ion-card-content>
+				<ion-list *ngIf="isShowProducts">
+					<ion-list-header>Produtos da sua lista</ion-list-header>
+					<ion-item *ngFor="let product of shopping.products">
+						<ion-avatar item-start><img (error)="onDefaultImg($event, product)" src="{{onProductImg(product)}}"></ion-avatar>
+						<h2 ion-text color="dark" class="fw500">{{product.name}} - {{product.volume}} {{product.unit}}</h2>
+						<p ion-text class="text-11x">{{ product.brand }} - {{ product.type }}</p>
+						<button ion-button clear class="green-bg text-white">R$ {{ product.price.toLocaleString() }}</button>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>
+			<ion-row>
+					<ion-col>
+						<button ion-button icon-start clear small>
+						<ion-icon name="cash"></ion-icon>
+						<div>R$: {{ shopping.productsPriceTotal.toLocaleString() }}</div>
+						</button>
+					</ion-col>
+					<ion-col>
+						<button ion-button icon-start clear small>
+						<ion-icon name="list"></ion-icon>
+						<div>{{ shopping.products.length }} itens</div>
+						</button>
+					</ion-col>
+				</ion-row>
+		</ion-card>
+	
+		<div *ngIf="isSearching" class="spinner-container">
+			<ion-spinner></ion-spinner>
+		</div>
+	
+		<ion-card *ngFor="let store of storeList">
+			<ion-item tapplable (click)="openStoreDetail(store);$event.stopPropagation();">
+				<ion-avatar item-start><img (error)="onStoreDefaultImg($event, store)" src="{{onStoreImg(store)}}"></ion-avatar>
+				<p ion-text>{{store.name}}</p>
+				<p ion-text>{{store.city}}, {{store.state}}</p>
+				<button ion-button item-end (click)="onToggleStoreProducts(store);$event.stopPropagation();">
+					<ion-icon *ngIf="!store.isShowProducts" name="add"></ion-icon>
+					<ion-icon *ngIf="store.isShowProducts" name="remove"></ion-icon>
+				</button>
+			</ion-item>
+			<ion-card-content>
+				<ion-list *ngIf="store.isShowProducts">
+					<ion-list-header>Produtos do estabelecimento</ion-list-header>
+					<ion-item  tapplable (click)="openProductDetail(product)" *ngFor="let product of store.products">
+						<ion-avatar	ail item-start><img (error)="onDefaultImg($event, product)" src="{{onProductImg(product)}}"></ion-avatar>
+						<h2 ion-text color="dark" class="fw500">{{product.name}} - {{product.volume}} {{product.unit}}</h2>
+						<p ion-text class="text-11x">{{ product.brand }} - {{ product.type }}</p>
+						<button ion-button clear class="green-bg text-white">R$ {{ product.price.toLocaleString() }}</button>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>
+			<ion-row>
+				<ion-col>
+					<button ion-button icon-start clear small>
+					<ion-icon name="cash"></ion-icon>
+					<div>R$: {{ store.productsPriceTotal.toLocaleString() }}</div>
+					</button>
+				</ion-col>
+				<ion-col>
+					<button ion-button icon-start clear small>
+					<ion-icon name="list"></ion-icon>
+					<div>{{ store.products.length }} itens</div>
+					</button>
+				</ion-col>
+			</ion-row>
+		</ion-card>
+				
+	</ion-content>

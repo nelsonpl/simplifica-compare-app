@@ -1,0 +1,51 @@
+<ion-header>
+	<ion-navbar color="light">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text>Minha Conta</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="profile light-bg">
+
+	<ion-card>
+		<ion-card-content class="profiles-bg">
+			<ion-grid no-padding fixed>
+				<ion-row no-padding>
+					<ion-col>
+						<img src="assets/img/avatar.jpg">
+						<h3 class="fw500">{{myAccount.name}}</h3>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-card-content>
+
+		<ion-grid no-padding fixed>
+			<ion-row no-padding>
+				<ion-col>
+					<div padding>
+						<ion-list>
+							<ion-list-header no-margin no-padding>
+								<span ion-text color="dark" class="fw500">Dados:</span>
+							</ion-list-header>
+							<ion-item>
+								<ion-label color="dark" stacked>Nome Completo:</ion-label>
+								<ion-label color="primary" stacked>{{myAccount.name}}</ion-label>
+							</ion-item>
+
+							<ion-item>
+								<ion-label color="dark" stacked>E-mail:</ion-label>
+								<ion-label color="primary" stacked>{{myAccount.email}}</ion-label>
+							</ion-item>
+
+						</ion-list>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+
+</ion-content>

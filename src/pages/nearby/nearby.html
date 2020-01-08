@@ -1,0 +1,39 @@
+<ion-header>
+	<ion-navbar color="light">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text>Proximidade</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+
+	<div #myMap style="width:100%; height:100%;"></div>
+
+</ion-content>
+
+<ion-footer class="no-padding" color="secondary">
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<button ion-button icon-left block color="primary" (click)="openHome()" class="col col-4">
+				<ion-icon name="home" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openProducts()" class="col col-4">
+				<ion-icon name="pricetags" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openStoreListPage()" class="col col-4">
+				<ion-icon name="pin" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openNearby()" class="col col-4">
+				<ion-icon name="map" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+		</ion-row>
+	</ion-grid>
+</ion-footer>

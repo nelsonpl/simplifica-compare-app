@@ -1,0 +1,82 @@
+<ion-split-pane when="lg">
+
+	<ion-menu side="left" id="authenticated" [content]="content" class="menu-bg">
+
+		<ion-header>
+			<ion-toolbar class="user-profile">
+
+				<div class="user-profile">
+					<ion-list no-margin>
+						<ion-item>
+
+							<ion-avatar item-left>
+								<img src="assets/img/avatar.jpg">
+							</ion-avatar>
+
+							<h2 ion-text class="text-white fw700 text-15x">
+								{{userName}}
+							</h2>
+							<p ion-text color="light"></p>
+							<!-- <p ion-text color="light">Tangará da Serra, MT</p> -->
+
+							<button *ngIf="perfilMenuItem" ion-button icon-left round color="primary" menuClose
+								(click)="openPage(perfilMenuItem)">
+								<ion-icon [name]="perfilMenuItem.icon"></ion-icon>
+								{{perfilMenuItem.title}}
+							</button>
+
+						</ion-item>
+					</ion-list>
+				</div>
+
+			</ion-toolbar>
+		</ion-header>
+
+		<ion-content color="dark" class="profile-bg">
+			<button *ngIf="loginMenuItem" ion-button icon-left full color="primary" no-margin menuClose
+				(click)="openPage(loginMenuItem)">
+				<ion-icon [name]="loginMenuItem.icon"></ion-icon>
+				{{loginMenuItem.title}}
+			</button>
+
+			<ion-list class="user-list">
+				<button menuClose ion-item (click)="openPage(homeItem)">
+					<ion-icon item-left name="home"></ion-icon>
+					Página Inicial
+				</button>
+
+				<button menuClose ion-item (click)="openPage(messagesItem)">
+					<ion-icon item-left name="mail"></ion-icon>
+					Mensagens 
+					<ion-badge *ngIf="isNewMsg" color="dark">+</ion-badge>
+				</button>
+			</ion-list>
+
+
+			<ion-list class="user-list">
+				<ion-list-header no-margin>
+					<span ion-text class="fw500">Menu</span>
+				</ion-list-header>
+				<button menuClose ion-item *ngFor="let menuItem of appMenuItems" (click)="openPage(menuItem)">
+					<ion-icon item-left [name]="menuItem.icon"></ion-icon>
+					{{menuItem.title}}
+				</button>
+			</ion-list>
+
+			<ion-list class="user-list">
+				<ion-list-header no-margin>
+					<span ion-text class="fw500">Ajuda e Configurações</span>
+				</ion-list-header>
+				<button menuClose ion-item *ngFor="let menuItem of helpMenuItems" (click)="openPage(menuItem)">
+					<ion-icon item-left [name]="menuItem.icon"></ion-icon>
+					{{menuItem.title}}
+				</button>
+			</ion-list>
+
+		</ion-content>
+
+	</ion-menu>
+
+	<ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>
+
+</ion-split-pane>

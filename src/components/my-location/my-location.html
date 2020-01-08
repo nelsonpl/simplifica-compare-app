@@ -1,0 +1,10 @@
+<ion-card no-margin>
+    <ion-item color="secondary">
+        <h3 ion-text no-margin color="primary" class="fw500 no-margin">Você está em:</h3>
+        <span ion-text class="text-11x no-margin">{{yourLocation}}</span>
+        <button ion-button outline round item-end icon-right color="primary" (click)="alertLocation()">
+            Alterar localização
+            <ion-icon name="locate"></ion-icon>
+        </button>
+    </ion-item>
+</ion-card>

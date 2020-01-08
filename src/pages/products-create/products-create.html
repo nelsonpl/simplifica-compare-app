@@ -1,0 +1,112 @@
+<ion-header>
+		<ion-navbar color="light">
+			<ion-title>
+				<span ion-text>Produto</span>
+			</ion-title>
+		</ion-navbar>
+	</ion-header>
+	
+	<ion-content>
+
+		<ion-card>
+
+			<ion-card-content>
+				<ion-avatar>
+					<img alt="Produto" style="width: 80px; height: 80px;" (error)="defaultImg($event)" src="{{productImg()}}">
+				</ion-avatar>
+			</ion-card-content>
+
+		</ion-card>
+	
+		<form name="form" [formGroup]="onForm" (ngSubmit)="onSubmit()">
+			<ion-card>
+				<ion-card-content>
+					<ion-list>
+						<ion-item>
+							<ion-label stacked>Estabelecimento*</ion-label>
+							<ion-select formControlName="storeId" placeholder="Selecione um estabelecimento"  required [(ngModel)]="product.storeId">
+								<ion-option *ngFor="let store of storeList" value={{store._id}} >{{store.text}}</ion-option>
+							</ion-select>
+							<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('storeId').touched && onForm.get('storeId').hasError('required')">Campo obrigatório</p>
+						</ion-item>
+						<ion-item>
+							<ion-label stacked>Tipo*</ion-label>
+							<ion-input [disabled]='!isNewType' (click)="selectCategory();" required formControlName="type" [(ngModel)]="product.type" placeholder={{typeText}} type="text" ></ion-input>
+							<button *ngIf="!isNewType" (click)="selectCategory();" type="button" ion-button item-end>
+								<ion-icon name="search"></ion-icon>
+							</button>
+						</ion-item>
+						<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('type').touched && onForm.get('type').hasError('required')">Campo obrigatório</p>
+						<ion-item>
+							<ion-label stacked>Marca*</ion-label>
+							<ion-input [disabled]='!isNewBrand' (click)="selectBrand();" required formControlName="brand" [(ngModel)]="product.brand" placeholder={{brandText}} type="text" ></ion-input>
+							<button *ngIf="!isNewBrand" (click)="selectBrand();" type="button" ion-button item-end>
+								<ion-icon name="search"></ion-icon>
+							</button>
+						</ion-item>
+						<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('brand').touched && onForm.get('brand').hasError('required')">Campo obrigatório</p>
+						<ion-item>
+							<ion-label stacked>Nome*</ion-label>
+							<ion-input [disabled]='!isNewName' (click)="selectName();" required formControlName="name" [(ngModel)]="product.name" placeholder={{nameText}} type="text" ></ion-input>
+							<button *ngIf="!isNewName" (click)="selectName();" type="button" ion-button item-end>
+								<ion-icon name="search"></ion-icon>
+							</button>
+						</ion-item>
+						<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('name').touched && onForm.get('name').hasError('required')">Campo obrigatório</p>
+						<ion-item>
+							<ion-label stacked>Preço*</ion-label>
+							<ion-input formControlName="price" placeholder="Informe preço"  required type="number" [(ngModel)]="product.price"></ion-input>
+						</ion-item>
+						<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('price').touched && onForm.get('price').hasError('required')">Campo obrigatório</p>
+						<ion-item>
+							<ion-label stacked>Descrição</ion-label>
+							<ion-input formControlName="description" placeholder="Informe a descrição"  type="text" [(ngModel)]="product.description"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label stacked>Embalagem</ion-label>
+							<ion-input formControlName="packing" type="text" placeholder="Informe a embalagem"  [(ngModel)]="product.packing"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label stacked>Unidade de medida</ion-label>
+							<ion-input [disabled]='!isNewUnit' (click)="selectUnit();" formControlName="unit" [(ngModel)]="product.unit" placeholder={{unitText}} type="text" ></ion-input>
+							<button *ngIf="!isNewUnit" (click)="selectUnit();" type="button" ion-button item-end>
+								<ion-icon name="search"></ion-icon>
+							</button>
+						</ion-item>
+						<ion-item>
+							<ion-label stacked>Volume</ion-label>
+							<ion-input formControlName="volume" placeholder="Informe o volume"  type="number" [(ngModel)]="product.volume"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label stacked>Validade</ion-label>
+							<ion-input formControlName="validity" placeholder="Informe a validade" type="date" [(ngModel)]="product.validity"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label stacked>Imagem</ion-label>
+							<ion-input (change)="fileChange($event)" placeholder="Selecione a foto" type="file" ></ion-input>
+						</ion-item>	
+					</ion-list>
+				</ion-card-content>
+	
+			</ion-card>
+
+
+			<ion-card>
+				<ion-card-content>
+					<ion-list>
+						<ion-item>
+							<ion-label>Aparecer na tela principal?</ion-label>
+							<ion-checkbox formControlName="isShowHome" [(ngModel)]="product.isShowHome" ></ion-checkbox>
+						</ion-item>
+					</ion-list>
+				</ion-card-content>
+			</ion-card>
+	
+			<ion-card>
+				<ion-card-content>
+					<button ion-button block type="submit" [disabled]="!onForm.valid" color="primary">Salvar</button>
+				</ion-card-content>
+			</ion-card>
+		</form>
+	
+	</ion-content>

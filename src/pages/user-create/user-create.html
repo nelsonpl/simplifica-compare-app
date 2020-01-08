@@ -1,0 +1,48 @@
+<ion-header>
+		<ion-navbar color="light">
+			<ion-title>
+				<span ion-text>Usuáro</span>
+			</ion-title>
+		</ion-navbar>
+	</ion-header>
+	
+	<ion-content>
+	
+		<form name="form" [formGroup]="onForm" (ngSubmit)="onSubmit()">
+			<ion-card>
+				<ion-card-content>
+					<ion-list>
+						<ion-item>
+							<ion-label stacked>Nome*</ion-label>
+							<ion-input required formControlName="name" [(ngModel)]="user.name" placeholder="Informe o nome" type="text" ></ion-input>
+						</ion-item>
+						<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('name').touched && onForm.get('name').hasError('required')">Campo obrigatório</p>
+
+						<ion-item>
+							<ion-label stacked>e-mail*</ion-label>
+							<ion-input required formControlName="email" [(ngModel)]="user.email" placeholder="Informe o e-mail" type="text" ></ion-input>
+						</ion-item>
+						<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('email').touched && onForm.get('email').hasError('required')">Campo obrigatório</p>
+
+						<ion-item>
+							<ion-label stacked>Tipo*</ion-label>
+							<ion-select formControlName="type" placeholder="Selecione um tipo" required [(ngModel)]="user.type">
+								<ion-option>ADMIN</ion-option>
+								<ion-option>CLIENT</ion-option>
+								<ion-option>USER</ion-option>
+							</ion-select>
+							<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('type').touched && onForm.get('type').hasError('required')">Campo obrigatório</p>
+						</ion-item>
+					</ion-list>
+				</ion-card-content>
+	
+			</ion-card>
+
+			<ion-card>
+				<ion-card-content>
+					<button ion-button block type="submit" [disabled]="!onForm.valid" color="primary">Salvar</button>
+				</ion-card-content>
+			</ion-card>
+		</form>
+	
+	</ion-content>

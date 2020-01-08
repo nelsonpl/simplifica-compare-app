@@ -1,0 +1,94 @@
+page-auth,
+.auth {
+  .grid {
+    padding: 0;
+    .col {
+      padding: 0;
+    }
+  }
+
+  .btn-group {
+    .button-ios,
+    .button-md {
+      border-radius: 0;
+      &:first-of-type {
+        border-radius: 2px 0 0 2px;
+      }
+      &:last-of-type {
+        border-radius: 0 2px 2px 0;
+      }
+    }
+  }
+
+  .scroll-content {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+
+    .auth-content {
+      width: 90%;
+
+      .logo {
+        width: 120px;
+        height: auto;
+        margin: 0 auto 10px;
+        // border-radius: 10%;
+        // background: url("../assets/img/ionbooking-ico.png") no-repeat;
+        // background-size: 100%;
+      }
+
+      .list-form {
+        padding: 0;
+        margin-bottom: 0;
+
+        ion-item {
+          background: none;
+          padding: 0;
+
+          &:first-child {
+            border-top: none;
+          }
+
+          &:after {
+            display: none;
+          }
+
+					&.item-md,
+					.item-ios {
+						&.item-block {
+							.item-inner {
+								border-bottom-color: color($colors, light) !important;
+							}
+						}
+					}
+
+          ion-label {
+            font-size: 1em;
+            color: color($colors, dark);
+            &.label-ios,
+            &.label-md {
+            	margin-top: 0;
+            }
+          }
+
+          input {
+            color: color($colors, dark);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+
+	page-auth,
+	.auth {
+	  .scroll-content {
+	    .auth-content {
+	      width: 40%;
+	    }
+	  }
+	}
+
+}

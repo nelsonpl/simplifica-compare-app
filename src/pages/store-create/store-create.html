@@ -1,0 +1,136 @@
+<ion-header>
+		<ion-navbar color="light">
+			<ion-title>
+				<span ion-text>Loja</span>
+			</ion-title>
+		</ion-navbar>
+	</ion-header>
+	
+	<ion-content>
+
+		<ion-card-content>
+			<ion-avatar>
+				<img alt="Loja"  (error)="onDefaultImg($event)" src="{{onStoreImg()}}">
+			</ion-avatar>
+		</ion-card-content>
+	
+		<form name="form" [formGroup]="onForm" (ngSubmit)="onSubmit()">
+			<ion-card>
+				<ion-card-header>Dados</ion-card-header>
+				<ion-card-content>
+					<ion-list>
+						<ion-item>
+							<ion-label>Categoria*</ion-label>
+							<ion-select formControlName="category" placeholder="Selecione uma categoria" [(ngModel)]="store.category">
+								<ion-option *ngFor="let category of categoryList" >{{category.text}}</ion-option>
+							</ion-select>
+						</ion-item>	
+						<ion-item>
+							<ion-label>Nome*</ion-label>
+							<ion-input required formControlName="name" [(ngModel)]="store.name" placeholder="Informe o nome" type="text" ></ion-input>
+						</ion-item>
+						<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('name').touched && onForm.get('name').hasError('required')">Campo obrigatório</p>
+						<ion-item>
+							<ion-label stacked>Imagem</ion-label>
+							<ion-input (change)="fileChange($event)" placeholder="Selecione a foto" type="file" ></ion-input>
+						</ion-item>	
+					</ion-list>
+				</ion-card-content>
+			</ion-card>
+
+			<ion-card>
+				<ion-card-header>Endereço</ion-card-header>
+				<ion-card-content>
+					<ion-list>
+						<ion-item>
+							<ion-label>Estado*</ion-label>
+							<ion-select formControlName="state" placeholder="Selecione um estado" (ngModelChange)="onCityBuild($event)" required [(ngModel)]="store.state">
+								<ion-option *ngFor="let state of stateList"  >{{state.text}}</ion-option>
+							</ion-select>
+						</ion-item>
+						<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('state').touched && onForm.get('state').hasError('required')">Campo obrigatório</p>
+						<ion-item>
+							<ion-label>Cidade*</ion-label>
+							<ion-select formControlName="city" placeholder="Selecione uma cidade" required [(ngModel)]="store.city">
+								<ion-option *ngFor="let city of cityList" >{{city.text}}</ion-option>
+							</ion-select>
+						</ion-item>
+						<p ion-text color="danger" class="text-12x has-error" *ngIf="onForm.get('city').touched && onForm.get('city').hasError('required')">Campo obrigatório</p>
+						<ion-item>
+							<ion-label>Endereço</ion-label>
+							<ion-input  formControlName="address" placeholder="Informe o endereço"  type="text" [(ngModel)]="store.address"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label>Numero</ion-label>
+							<ion-input formControlName="number" placeholder="Informe o número"   type="text" [(ngModel)]="store.number"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label>Bairro</ion-label>
+							<ion-input formControlName="neighborhood" placeholder="Informe o bairro"  type="text" [(ngModel)]="store.neighborhood"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label>Complemento</ion-label>
+							<ion-input formControlName="complement" placeholder="Informe o complemento" type="text" [(ngModel)]="store.complement"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label>Ponto de Referência</ion-label>
+							<ion-input formControlName="ref" placeholder="Informe um ponto de referência" type="text" [(ngModel)]="store.ref"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label>Latitude</ion-label>
+							<ion-input formControlName="latitude" placeholder="Informe a latitude"  type="text" [(ngModel)]="latitude"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label>Longitude</ion-label>
+							<ion-input formControlName="longitude" placeholder="Informe a longitude"  type="text" [(ngModel)]="longitude"></ion-input>
+						</ion-item>
+					</ion-list>
+				</ion-card-content>
+			</ion-card>
+			
+			<ion-card>
+				<ion-card-header>Meios de Contato</ion-card-header>
+				<ion-card-content>
+					<ion-list>
+						<ion-item>
+							<ion-label>e-mail</ion-label>
+							<ion-input formControlName="email" placeholder="Informe o e-mail" type="email" [(ngModel)]="store.email"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label>Telefone</ion-label>
+							<ion-input formControlName="phone" placeholder="Informe a validade" type="phone" [(ngModel)]="store.phone"></ion-input>
+						</ion-item>
+						<ion-item>
+							<ion-label>Celular</ion-label>
+							<ion-input formControlName="cell" placeholder="Informe a validade" type="phone" [(ngModel)]="store.cell"></ion-input>
+						</ion-item>
+					</ion-list>
+				</ion-card-content>
+			</ion-card>
+
+			<ion-card>
+				<ion-card-header>Configuração</ion-card-header>
+				<ion-card-content>
+					<ion-list>
+						<ion-item>
+							<ion-label>Aparecer na tela principal?</ion-label>
+							<ion-checkbox formControlName="isShowHome" [(ngModel)]="store.isShowHome" ></ion-checkbox>
+						</ion-item>
+						<ion-item>
+							<ion-label>Usuário responsável</ion-label>
+							<ion-select formControlName="userOwner" placeholder="Selecione um cliente" [(ngModel)]="store.userOwner">
+								<ion-option *ngFor="let user of userList" [value]="user._id" >{{user.text}}</ion-option>
+							</ion-select>
+						</ion-item>	
+					</ion-list>
+				</ion-card-content>
+			</ion-card>
+	
+			<ion-card>
+				<ion-card-content>
+					<button ion-button block type="submit" [disabled]="!onForm.valid" color="primary">Salvar</button>
+				</ion-card-content>
+			</ion-card>
+		</form>
+	
+	</ion-content>

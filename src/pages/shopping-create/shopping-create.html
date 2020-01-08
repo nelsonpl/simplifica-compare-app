@@ -1,0 +1,41 @@
+<ion-header>
+	<ion-navbar color="light">
+		<ion-title>
+			<span ion-text>Lista de Compra</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+	<ion-item no-padding>
+		<ion-label color="primary" stacked>
+			<span ion-text color="dark" class="fw500">Título</span>
+		</ion-label>
+		<ion-input type="text" [(ngModel)]="shopping.title"></ion-input>
+	</ion-item>
+
+	<ion-item no-padding>
+		<ion-label color="primary" stacked>
+			<span ion-text color="dark" class="fw500">Descrição</span>
+		</ion-label>
+		<ion-input type="text" [(ngModel)]="shopping.description"></ion-input>
+	</ion-item>
+
+	<ion-list>
+		<ion-item no-padding *ngFor="let product of shopping.products" tappable (click)="onOpenProductDetail(product)">
+			<ion-avatar item-start>
+				<img alt="Produto" (error)="productImgDefault.defaultImg($event, product)" src="{{productImgDefault.productImg(product)}}">
+			</ion-avatar>
+			<h2 ion-text color="dark" class="fw500">{{product.name}} - {{product.volume}} {{product.unit}}</h2>
+			<p ion-text color="primary" class="text-11x">Marca: {{ product.brand }}</p>
+			<p ion-text color="primary" class="text-11x">Tipo: {{ product.type }}</p>
+			<p ion-text color="primary" class="text-11x">{{ product.price | currency  }}</p>
+			<button ion-button clear item-end (click)="onRemove(product);$event.stopPropagation();">
+				<ion-icon name="trash"></ion-icon>
+			</button>
+		</ion-item>
+	</ion-list>
+
+	<button ion-button block color="primary" (click)="onSave()">Salvar</button>
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header>
+	<ion-navbar color="light">
+		<ion-title>
+			<span ion-text>Usuário</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<div *ngIf="user">
+		<ion-card>
+			<ion-card-content>
+				<div>
+					<ion-grid>
+						<ion-row>
+							<ion-col>
+								<h1>{{user.name}}</h1>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</div>
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-content>
+				<h2>e-mail</h2>
+				<p>{{user.email}}</p>
+				<hr>
+				<h2>Tipo</h2>
+				<p>{{user.type}}</p>
+				<hr>
+				<h2>Data do Cadastro</h2>
+				<p>{{user.createdAt | date :'shortDate'}}</p>
+				<hr>
+				<h2>Data do Atualização</h2>
+				<p>{{user.updatedAt | date :'shortDate'}}</p>
+				<hr>
+			</ion-card-content>
+		</ion-card>
+		<ion-card>
+			<ion-card-content>
+				<ion-item>
+					<button ion-button large icon-only (click)="onEdit()">
+						<ion-icon name="create"></ion-icon>
+					</button>
+					<button ion-button large icon-only (click)="onDelete()">
+						<ion-icon name="trash"></ion-icon>
+					</button>
+				</ion-item>
+			</ion-card-content>
+		</ion-card>
+	</div>
+</ion-content>

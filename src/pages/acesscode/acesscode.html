@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar color="light">
+        <ion-title>
+            <span ion-text>Validar codigo de acesso</span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item no-padding>
+        <ion-label color="primary" stacked>
+            <span ion-text color="dark" class="fw500">E-mail*</span>
+        </ion-label>
+        <ion-input type="text" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding>
+        <ion-label color="primary" stacked>
+            <span ion-text color="dark" class="fw500">Codigo de Acesso*</span>
+        </ion-label>
+        <ion-input type="text" [(ngModel)]="accesscode"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding>
+        <ion-label color="primary" stacked>
+            <span ion-text color="dark" class="fw500">Nova Senha*</span>
+        </ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding>
+        <ion-label color="primary" stacked>
+            <span ion-text color="dark" class="fw500">Confirmar Nova Senha*</span>
+        </ion-label>
+        <ion-input type="password" [(ngModel)]="confirmPassword"></ion-input>
+    </ion-item>
+
+    <button ion-button block color="primary" (click)="onValid()">Resetar</button>
+</ion-content>

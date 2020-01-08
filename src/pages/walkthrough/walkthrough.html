@@ -1,0 +1,44 @@
+<ion-content>
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<ion-col>
+
+			  <ion-slides pager="true" dir="{{dir}}">
+			    <ion-slide *ngFor="let slide of slideList">
+			      <ion-toolbar fixed>
+			        <ion-buttons end>
+			          <button ion-button (click)="onLastSlide()">Pular</button>
+			        </ion-buttons>
+			      </ion-toolbar>
+			      <img [src]="slide.image" class="slide-image">
+			      <h3 class="slide-title" [innerHTML]="slide.title"></h3>
+			      <p [innerHTML]="slide.description"></p>
+
+						<div padding>
+				      <button ion-button round block color="primary" margin-top icon-end (click)="onSlideNext()">
+				      	Próximo
+				      	<ion-icon name="arrow-round-forward"></ion-icon>
+				    	</button>
+			    	</div>
+			    </ion-slide>
+			    <ion-slide>
+			      <ion-toolbar>
+			      </ion-toolbar>
+			      <img src="assets/img/logo-compare.png" class="slide-image" margin-top>
+			      <h2 class="slide-title">Vamos começar?</h2>
+
+			      <div padding>
+			        <button ion-button block round color="secondary" margin-top (click)="openAuthPage()">
+			          Entrar / Registrar-se
+			        </button>
+			        <button ion-button block round color="primary" margin-top (click)="openHomePage()">
+			          Continuar
+			        </button>
+			      </div>
+			    </ion-slide>
+			  </ion-slides>
+
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

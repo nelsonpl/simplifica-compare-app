@@ -1,0 +1,82 @@
+<ion-header>
+	<ion-navbar color="light">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text>Produtos</span>
+		</ion-title>
+	</ion-navbar>
+	<ion-toolbar color="secondary">
+		<ion-searchbar [formControl]="filterCtrl" (ionCancel)="onCancel($event)" placeholder="Procurar..."
+			(ionChange)="onSearching()"></ion-searchbar>
+		<ion-buttons end>
+			<button ion-button (click)="onOpenFilter()">
+				<ion-icon name="options"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="lightest-bg">
+
+	<ion-item *ngIf="isNotItems">
+		<ion-label color="primary">Nenhum item para mostrar.</ion-label>
+	</ion-item>
+
+	<div *ngIf="isSearching" class="spinner-container">
+		<ion-spinner></ion-spinner>
+	</div>
+
+	<!-- propriedade pullMin adicionada pois sem ela o evento ionRefresh era 
+acionado quando rolava a lista para baixo após aciona-lo manualmente -->
+	<ion-refresher slot="fixed" pullMin="100" (ionRefresh)="onRefresh($event)">
+		<ion-refresher-content refreshingSpinner="dots"></ion-refresher-content>
+	</ion-refresher>
+
+
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<ion-col col-12 col-md-4 *ngFor="let dish of items">
+				<ion-list>
+					<ion-item tapplable (click)="onOpenItemDetail(dish)">
+						<ion-thumbnail item-start>
+							<img alt="Produto" (error)="defaultImg($event, dish)" src="{{productImg(dish)}}">
+						</ion-thumbnail>
+						<h2 ion-text color="dark" class="fw500">{{dish.name}} - {{dish.volume}} {{dish.unit}}</h2>
+						<p ion-text class="text-11x">{{ dish.brand }} - {{ dish.type }}</p>
+						<p ion-text color="primary">{{ dish.storeName }}</p>
+						<button ion-button clear class="green-bg text-white">R$ {{ dish.price.toLocaleString() }}</button>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+			<ion-infinite-scroll (ionInfinite)="onInfinite($event)">
+				<ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>
+			</ion-infinite-scroll>
+		</ion-row>
+	</ion-grid>
+
+</ion-content>
+
+<ion-footer class="no-padding" color="secondary">
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+				<button ion-button icon-left block color="primary" (click)="openHome()" class="col col-4">
+					<ion-icon name="home" class="text-18x"></ion-icon>
+					<span ion-text class="text-12x"></span>
+				</button>
+			<button ion-button icon-left block color="primary" (click)="openProducts()" class="col col-4">
+				<ion-icon name="pricetags" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openStoreListPage()" class="col col-4">
+				<ion-icon name="pin" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+			<button ion-button icon-left block color="primary" (click)="openNearby()" class="col col-4">
+				<ion-icon name="map" class="text-18x"></ion-icon>
+				<span ion-text class="text-12x"></span>
+			</button>
+		</ion-row>
+	</ion-grid>
+</ion-footer>

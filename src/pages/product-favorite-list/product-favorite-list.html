@@ -1,0 +1,40 @@
+<ion-header>
+	<ion-navbar color="light">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text>Produtos Favoritos</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="lightest-bg">
+
+	<ion-item *ngIf="isNotItems">
+		<ion-label color="primary">Nenhum item para mostrar.</ion-label>
+	</ion-item>
+
+	<div *ngIf="isSearching" class="spinner-container">
+		<ion-spinner></ion-spinner>
+	</div>
+
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<ion-col col-12 col-md-4 *ngFor="let item of items">
+				<ion-list>
+					<ion-item tapplable (click)="openItemDetail(item)">
+						<ion-thumbnail item-start>
+							<img alt="Produto" (error)="defaultImg($event, item)" src="{{productImg(item)}}">
+						</ion-thumbnail>
+						<h2 ion-text color="dark" class="fw500">{{item.name}} - {{item.volume}} {{item.unit}}</h2>
+						<p ion-text class="text-11x">{{ item.brand }} - {{ item.type }}</p>
+						<p ion-text color="primary">{{ item.storeName }}</p>
+						<button ion-button clear class="green-bg text-white">R$ {{ item.price.toLocaleString() }}</button>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+</ion-content>
