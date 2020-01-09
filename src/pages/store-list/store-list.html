@@ -53,6 +53,11 @@
 				</ion-col>
 			</ion-row>
 		</ion-grid>
+		<ion-fab *ngIf="isAuth && isAdmin" right bottom>
+			<button ion-fab (click)="onRedirectAdd()">
+				<ion-icon name="add"></ion-icon>
+			</button>
+		</ion-fab>
 		<ion-infinite-scroll (ionInfinite)="onInfinite($event)">
 			<ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>
 		</ion-infinite-scroll>

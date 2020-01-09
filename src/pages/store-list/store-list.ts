@@ -26,6 +26,7 @@ export class StoreListPage implements OnInit {
     private page = 1;
     private apiUrl = environment.server_url;
     public isAuth = false;
+    public isAdmin = false;
     public filterCtrl: FormControl;
     public isSearching: any = false;
     public items: Array<any>;
@@ -47,7 +48,8 @@ export class StoreListPage implements OnInit {
                 this.buildList();
             });
         this.isAuth = this.authService.currentUserValue != null;
-
+        if (this.isAuth)
+            this.isAdmin = this.authService.currentUserValue.userType === 'ADMIN';
     }
 
     ionViewWillEnter() {

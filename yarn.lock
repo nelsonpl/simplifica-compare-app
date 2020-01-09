@@ -114,6 +114,11 @@
   resolved "https://registry.yarnpkg.com/@ionic-native/geolocation/-/geolocation-4.20.0.tgz#e3ae1891844dc97932ac6a12e0c06875e7981f6d"
   integrity sha512-2w/KpWuXVDqGMSDLhBut0Domy3yGolpPTvff/8xP8HGxxf1bcEKQLfoY68viOSuTPt7sg33rWWAKHf2/YOI6Lg==
 
+"@ionic-native/google-plus@^4.20.0":
+  version "4.20.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/google-plus/-/google-plus-4.20.0.tgz#7645b1d98b164cc8390a3b377a440b1d5555cdb2"
+  integrity sha512-LTKZBxs9PTcjUxvrMNAZ7ewyNnzNJnrxFyazRVSAIsouxURK8ZpjAxaLMSPF+EuTGQGQzfgu/ViHWaoLKqnNaw==
+
 "@ionic-native/keyboard@4.10.0":
   version "4.10.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/keyboard/-/keyboard-4.10.0.tgz#feab7bbd3ff27b5cb041f400b7b5172e4776df1d"

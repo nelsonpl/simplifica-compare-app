@@ -77,6 +77,12 @@ export class compareApp implements OnInit {
             this.perfilMenuItem = { title: 'Minha conta', component: 'page-my-account', icon: 'contact' };
             this.loginMenuItem = { title: 'Sair', component: 'page-auth', icon: 'log-out' };
             this.userName = session.userName;
+
+            if (session.userType === 'ADMIN') {
+                this.messagesItem = { component: 'page-message-list' };
+                this.appMenuItems.push({ title: 'Usuários', component: 'page-user-list', icon: 'person' });
+                this.appMenuItems.push({ title: 'Indicações', component: 'page-product-indication-list', icon: 'thumbs-up' });
+            }
         }
         else {
             this.loginMenuItem = { title: 'Entrar', component: 'page-auth', icon: 'log-in' };
